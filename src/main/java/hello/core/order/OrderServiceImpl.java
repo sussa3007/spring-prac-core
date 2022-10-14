@@ -1,18 +1,21 @@
 package hello.core.order;
 
 import hello.core.discount.DiscountPolicy;
-import hello.core.discount.FixDiscountPolicyImpl;
-import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
-import hello.core.member.MemoryMemberRepository;
 
 
 public class OrderServiceImpl implements OrderService {
-    private final MemberRepository memberRepository
-            = new MemoryMemberRepository();
-    private final DiscountPolicy discountPolicy
-            = new RateDiscountPolicy();
+    private final MemberRepository memberRepository;
+    private final DiscountPolicy discountPolicy;
+
+    public OrderServiceImpl(
+            MemberRepository memberRepository,
+            DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
+
     /**
      * DIP 위반
      * OrderServiceImpl 는 DiscountPolicy 인터페이스 뿐만아니라
